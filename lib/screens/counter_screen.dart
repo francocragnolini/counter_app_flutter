@@ -20,7 +20,7 @@ class _CounterScreenState extends State<CounterScreen> {
         title: const Text("CounterScreen"),
         elevation: 5,
       ),
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.white70,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,14 +39,43 @@ class _CounterScreenState extends State<CounterScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          counter++;
-          setState(() {});
-        },
-        child: const Icon(
-          Icons.add,
-        ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              counter++;
+              setState(() {});
+            },
+            child: const Icon(
+              Icons.plus_one,
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              counter = 0;
+              setState(() {});
+            },
+            child: const Icon(
+              Icons.exposure,
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              counter--;
+              setState(() {});
+            },
+            child: const Icon(
+              Icons.exposure_minus_1,
+            ),
+          ),
+        ],
       ),
     );
   }
