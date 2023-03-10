@@ -11,6 +11,22 @@ class _CounterScreenState extends State<CounterScreen> {
   // propiedad
   int counter = 10;
 
+  void increase() {
+    counter++;
+    setState(() {});
+  }
+
+  void decrease() {
+    setState(() {
+      counter--;
+    });
+  }
+
+  void resetCounter() {
+    counter = 0;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     const TextStyle fontSize30 = TextStyle(fontSize: 30);
@@ -39,44 +55,57 @@ class _CounterScreenState extends State<CounterScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              counter++;
-              setState(() {});
-            },
-            child: const Icon(
-              Icons.plus_one,
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              counter = 0;
-              setState(() {});
-            },
-            child: const Icon(
-              Icons.exposure,
-            ),
-          ),
-          const SizedBox(
-            width: 20,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              counter--;
-              setState(() {});
-            },
-            child: const Icon(
-              Icons.exposure_minus_1,
-            ),
-          ),
-        ],
+      floatingActionButton: CustomFloatingActions(
+        increase: increase,
+        decrease: decrease,
+        reset: resetCounter,
       ),
+    );
+  }
+}
+
+class CustomFloatingActions extends StatelessWidget {
+  final Function increase;
+  final Function decrease;
+  final Function reset;
+
+  const CustomFloatingActions({
+    Key? key,
+    required this.increase,
+    required this.decrease,
+    required this.reset,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        FloatingActionButton(
+          onPressed: () => increase(),
+          child: const Icon(
+            Icons.plus_one,
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        FloatingActionButton(
+          onPressed: () => reset(),
+          child: const Icon(
+            Icons.exposure,
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        FloatingActionButton(
+          onPressed: () => decrease(),
+          child: const Icon(
+            Icons.exposure_minus_1,
+          ),
+        ),
+      ],
     );
   }
 }
